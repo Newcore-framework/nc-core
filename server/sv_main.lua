@@ -47,17 +47,6 @@ RegisterNetEvent('playerConnecting', function(_, _, def)
     local response = MySQL.query.await('SELECT * FROM `players` WHERE `license` = ?', {
         license
     })
-    local player = response[1]
-    if player.ban == 1 then
-        def.done('[NEWCORE] Du er bannet for ' .. player.banreason)
-    else
-        def.update('[NEWCORE] Player not banned')
-    end
-    if Nccore.whitelist == true then
-        if player.whitelisted == 0 then
-            def.done('[NEWCORE] Du er ikke whitelisted. Ansøg på vores discord ' .. Nccore.discordlink)
-        end
-    end
     if not player then
         def.update('[NEWCORE] Creating character')
         Wait(2000)
@@ -69,6 +58,17 @@ RegisterNetEvent('playerConnecting', function(_, _, def)
             license
         })
         player = response[1]
+    end
+    local player = response[1]
+    if player.ban == 1 then
+        def.done('[NEWCORE] Du er bannet for ' .. player.banreason)
+    else
+        def.update('[NEWCORE] Player not banned')
+    end
+    if Nccore.whitelist == true then
+        if player.whitelisted == 0 then
+            def.done('[NEWCORE] Du er ikke whitelisted. Ansøg på vores discord ' .. Nccore.discordlink)
+        end
     end
 
     player.chosenCharacter = -1
