@@ -2,9 +2,6 @@ lib.callback.register('nc-core:GetCharacterData', function(src)
     local characterdata = MySQL.single.await('SELECT * FROM `characters` WHERE `id` = ?', {
         exports['nc-core']:GetPlayer(src).id
     })
-
-    -- print(json.encode(exports['nc-core']:GetPlayer(src)))
-
     return characterdata
 end)
 
