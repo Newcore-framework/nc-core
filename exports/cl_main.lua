@@ -12,10 +12,6 @@ exports("Getjob", function(job)
     end
 end)
 
-exports("GetPlayerJobById", function(job)
-    return Newcore.jobs[job]
-end)
-
 exports('GetPlayerData', function()
     local playerdata = lib.callback.await('nc-core:GetPlayerData', false)
     return playerdata
